@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<title>Saif Business - Dark/Light Mode</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* LIGHT MODE */
+[data-theme="light"] {
+    --bg: #f8fafc;
+    --bg2: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --card: #ffffff;
+    --shadow: rgba(0,0,0,0.08);
+    --nav-bg: rgba(255,255,255,0.95);
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --border: rgba(255,255,255,0.08);
+    --card: #1a1a1a;
+    --shadow: rgba(0,0,0,0.3);
+    --nav-bg: rgba(10,10,10,0.95);
+}
+
+:root {
+    --primary: #6366f1;
+    --secondary: #8b5cf6;
+    --accent: #ec4899;
+    --green: #10b981;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+/* NAV */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0 80px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+}
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+.nav-links { display: flex; gap: 35px; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary); }
+
+/* TOGGLE */
+.toggle-btn {
+    width: 55px;
+    height: 28px;
+    background: var(--border);
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+}
+[data-theme="dark"] .toggle-btn { background: var(--primary); }
+.toggle-circle {
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+[data-theme="dark"] .toggle-circle { transform: translateX(27px); }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.btn-nav {
+    padding: 9px 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-nav:hover { background: var(--secondary); transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 70px 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+[data-theme="light"] .hero { background: linear-gradient(135deg, #f0f4ff, #faf5ff, #f0fdff); }
+[data-theme="dark"] .hero { background: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.1) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(236,72,153,0.08) 0%, transparent 50%); }
+.hero-left { flex: 1; animation: fadeInUp 1s ease; }
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.2);
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+.hero h1 { font-size: 68px; font-weight: 900; line-height: 1.05; letter-spacing: -3px; margin-bottom: 25px; }
+.hero h1 span { background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 18px; color: var(--muted); line-height: 1.8; margin-bottom: 40px; max-width: 520px; }
+.hero-actions { display: flex; gap: 15px; margin-bottom: 60px; }
+.btn-hero {
+    padding: 15px 32px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-hero:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(99,102,241,0.3); }
+.btn-ghost {
+    padding: 15px 32px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+.hero-stats { display: flex; gap: 40px; padding-top: 40px; border-top: 1px solid var(--border); }
+.stat h3 { font-size: 36px; font-weight: 900; letter-spacing: -1px; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.hero-right { flex: 1; display: flex; justify-content: center; }
+.hero-visual {
+    width: 420px;
+    height: 420px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(236,72,153,0.1));
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    animation: float 5s ease-in-out infinite;
+    box-shadow: 0 20px 60px var(--shadow);
+}
+
+/* SERVICES */
+.services { padding: 100px 80px; background: var(--bg2); }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-header h2 { font-size: 44px; font-weight: 800; letter-spacing: -2px; margin-bottom: 12px; }
+.section-header h2 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-header p { font-size: 16px; color: var(--muted); }
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.service-card {
+    background: var(--card);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transition: 0.3s;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px var(--shadow); border-color: rgba(99,102,241,0.3); }
+.service-icon { font-size: 40px; margin-bottom: 20px; display: block; }
+.service-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+.service-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* PORTFOLIO */
+.portfolio { padding: 100px 80px; background: var(--bg); }
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 50px auto 0;
+}
+.portfolio-card {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: 0.3s;
+    cursor: pointer;
+    background: var(--card);
+}
+.portfolio-card:hover { transform: scale(1.03); box-shadow: 0 20px 40px var(--shadow); }
+.portfolio-img {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+}
+.portfolio-card:nth-child(1) .portfolio-img { background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15)); }
+.portfolio-card:nth-child(2) .portfolio-img { background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(244,114,182,0.15)); }
+.portfolio-card:nth-child(3) .portfolio-img { background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(52,211,153,0.15)); }
+.portfolio-card:nth-child(4) .portfolio-img { background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(251,191,36,0.15)); }
+.portfolio-card:nth-child(5) .portfolio-img { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(248,113,113,0.15)); }
+.portfolio-card:nth-child(6) .portfolio-img { background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(34,211,238,0.15)); }
+.portfolio-info { padding: 20px; }
+.portfolio-tag { font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 8px; }
+.portfolio-info h3 { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+.portfolio-info p { font-size: 13px; color: var(--muted); }
+
+/* PRICING */
+.pricing { padding: 100px 80px; background: var(--bg2); text-align: center; }
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1000px;
+    margin: 50px auto 0;
+}
+.pricing-card {
+    background: var(--card);
+    padding: 40px 30px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    transition: 0.3s;
+    position: relative;
+}
+.pricing-card.popular { border-color: var(--primary); }
+.popular-tag {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.pricing-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--shadow); }
+.pricing-card.popular:hover { transform: scale(1.02) translateY(-5px); }
+.pricing-card h3 { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+.price { font-size: 55px; font-weight: 900; letter-spacing: -2px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; }
+.price-period { font-size: 14px; color: var(--muted); margin-bottom: 30px; }
+.price-features { list-style: none; margin-bottom: 30px; text-align: left; }
+.price-features li { padding: 10px 0; font-size: 14px; color: var(--muted); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.price-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+.price-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+}
+.price-btn.outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.price-btn.outline:hover { border-color: var(--primary); color: var(--primary); }
+.price-btn.filled { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+.price-btn.filled:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* CONTACT */
+.contact { padding: 100px 80px; background: var(--bg); }
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.contact-left h2 { font-size: 42px; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; }
+.contact-left h2 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.contact-left p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 30px; }
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-item { display: flex; align-items: center; gap: 15px; }
+.contact-icon { width: 45px; height: 45px; background: rgba(99,102,241,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.contact-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.contact-item p { font-size: 13px; color: var(--muted); }
+.contact-form { background: var(--card); padding: 40px; border-radius: 20px; border: 1px solid var(--border); }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: 0.3s;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+.form-group textarea { height: 120px; resize: none; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+/* FOOTER */
+footer { background: var(--bg2); padding: 60px 80px 30px; border-top: 1px solid var(--border); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+.footer-brand p { font-size: 14px; color: var(--muted); line-height: 1.8; margin-top: 15px; }
+.footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 20px; }
+.footer-col a { display: block; color: var(--muted); text-decoration: none; font-size: 14px; margin-bottom: 12px; transition: 0.3s; }
+.footer-col a:hover { color: var(--primary); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 25px; display: flex; justify-content: space-between; }
+.footer-bottom p { font-size: 13px; color: var(--muted); }
+.footer-bottom span { color: var(--primary); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">⚡ SaifBiz</div>
+    <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+        <button class="toggle-btn" onclick="toggleTheme()" id="themeToggle">
+            <div class="toggle-circle" id="toggleCircle">🌙</div>
+        </button>
+        <button class="btn-nav" onclick="document.getElementById('contact').scrollIntoView()">Get Started</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-left">
+        <div class="hero-badge">✦ Award Winning Digital Agency</div>
+        <h1>We Build Digital<br>Products That<br><span>Drive Growth</span></h1>
+        <p>We help ambitious businesses grow online with beautiful websites, powerful apps and data-driven marketing strategies.</p>
+        <div class="hero-actions">
+            <button class="btn-hero" onclick="document.getElementById('portfolio').scrollIntoView()">View Our Work →</button>
+            <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView()">Start a Project</button>
+        </div>
+        <div class="hero-stats">
+            <div class="stat"><h3>150+</h3><p>Projects Done</p></div>
+            <div class="stat"><h3>98%</h3><p>Satisfaction</p></div>
+            <div class="stat"><h3>8+</h3><p>Years Experience</p></div>
+        </div>
+    </div>
+    <div class="hero-right">
+        <div class="hero-visual">⚡</div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+    <div class="section-header">
+        <h2>What We <span>Do Best</span></h2>
+        <p>Comprehensive digital services to grow your business</p>
+    </div>
+    <div class="services-grid">
+        <div class="service-card">
+            <span class="service-icon">🌐</span>
+            <h3>Web Design</h3>
+            <p>Beautiful, modern and fully responsive websites that convert visitors into customers.</p>
+        </div>
+        <div class="service-card">
+            <span class="service-icon">📱</span>
+            <h3>Mobile Apps</h3>
+            <p>Native iOS and Android apps that deliver exceptional user experiences.</p>
+        </div>
+        <div class="service-card">
+            <span class="service-icon">🎨</span>
+            <h3>Brand Identity</h3>
+            <p>Logo design, color systems and complete brand guidelines that make you unforgettable.</p>
+        </div>
+        <div class="service-card">
+            <span class="service-icon">📊</span>
+            <h3>Digital Marketing</h3>
+            <p>Data-driven strategies that grow your audience and maximize your ROI.</p>
+        </div>
+        <div class="service-card">
+            <span class="service-icon">🔍</span>
+            <h3>SEO Optimization</h3>
+            <p>Rank higher on Google and drive organic traffic to your website consistently.</p>
+        </div>
+        <div class="service-card">
+            <span class="service-icon">☁️</span>
+            <h3>Cloud Solutions</h3>
+            <p>Scalable cloud infrastructure that grows with your business needs.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+    <div class="section-header">
+        <h2>Our Recent <span>Work</span></h2>
+        <p>Projects we are proud of</p>
+    </div>
+    <div class="portfolio-grid">
+        <div class="portfolio-card">
+            <div class="portfolio-img">🛍️</div>
+            <div class="portfolio-info">
+                <p class="portfolio-tag">E-Commerce</p>
+                <h3>Fashion Store</h3>
+                <p>Complete redesign & development</p>
+            </div>
+        </div>
+        <div class="portfolio-card">
+            <div class="portfolio-img">🏥</div>
+            <div class="portfolio-info">
+                <p class="portfolio-tag">Healthcare</p>
+                <h3>MedCare Platform</h3>
+                <p>Patient management system</p>
+            </div>
+        </div>
+        <div class="portfolio-card">
+            <div class="portfolio-img">🚀</div>
+            <div class="portfolio-info">
+                <p class="portfolio-tag">SaaS</p>
+                <h3>FlowApp Dashboard</h3>
+                <p>Complex SaaS UI design</p>
+            </div>
+        </div>
+        <div class="portfolio-card">
+            <div class="portfolio-img">🍽️</div>
+            <div class="portfolio-info">
+                <p class="portfolio-tag">Restaurant</p>
+                <h3>Gourmet Restaurant</h3>
+                <p>Luxury website & branding</p>
+            </div>
+        </div>
+        <div class="portfolio-card">
+            <div class="portfolio-img">🏠</div>
+            <div class="portfolio-info">
+                <p class="portfolio-tag">Real Estate</p>
+                <h3>LuxuryHomes Portal</h3>
+                <p>Property listing platform</p>
+            </div>
+        </div>
+        <div class="portfolio-card">
+            <div class="portfolio-img">📱</div>
+            <div class="portfolio-info">
+                <p class="portfolio-tag">Mobile App</p>
+                <h3>FitLife App</h3>
+                <p>Fitness tracking app</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+    <div class="section-header">
+        <h2>Simple <span>Pricing</span></h2>
+        <p>Transparent pricing with no hidden fees</p>
+    </div>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>Starter</h3>
+            <div class="price">$499</div>
+            <div class="price-period">one time</div>
+            <ul class="price-features">
+                <li>1 Page Website</li>
+                <li>Mobile Responsive</li>
+                <li>Contact Form</li>
+                <li>3 Day Delivery</li>
+            </ul>
+            <button class="price-btn outline" onclick="alert('Starter selected!')">Get Started</button>
+        </div>
+        <div class="pricing-card popular">
+            <div class="popular-tag">Most Popular</div>
+            <h3>Professional</h3>
+            <div class="price">$999</div>
+            <div class="price-period">one time</div>
+            <ul class="price-features">
+                <li>5 Page Website</li>
+                <li>Mobile Responsive</li>
+                <li>Dark/Light Mode</li>
+                <li>Animation Effects</li>
+                <li>7 Day Delivery</li>
+            </ul>
+            <button class="price-btn filled" onclick="alert('Pro selected!')">Get Started</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Enterprise</h3>
+            <div class="price">$2499</div>
+            <div class="price-period">one time</div>
+            <ul class="price-features">
+                <li>10+ Page Website</li>
+                <li>E-commerce Features</li>
+                <li>Admin Dashboard</li>
+                <li>14 Day Delivery</li>
+            </ul>
+            <button class="price-btn outline" onclick="alert('Enterprise selected!')">Contact Us</button>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="contact-layout">
+        <div class="contact-left">
+            <h2>Let's Work<br><span>Together</span></h2>
+            <p>Tell us about your project and let's create something extraordinary together.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>saif@saifbiz.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+966 000 000 000</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Location</h4>
+                        <p>Riyadh, Saudi Arabia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" placeholder="Saif">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Islam">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="saif@email.com">
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea placeholder="Tell us about your project..."></textarea>
+            </div>
+            <button class="submit-btn" onclick="alert('Message sent! We will contact you within 24 hours.')">Send Message →</button>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-top">
+        <div class="footer-brand">
+            <div class="logo">⚡ SaifBiz</div>
+            <p>A digital agency helping ambitious brands build extraordinary digital experiences.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Services</h4>
+            <a href="#">Web Design</a>
+            <a href="#">Mobile Apps</a>
+            <a href="#">Branding</a>
+            <a href="#">Marketing</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Blog</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="#">saif@saifbiz.com</a>
+            <a href="#">+966 000 000 000</a>
+            <a href="#">Riyadh, KSA</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 <span>SaifBiz</span>. All Rights Reserved.</p>
+        <p>Built by <span>Saif Islam</span></p>
+    </div>
+</footer>
+
+<script>
+function toggleTheme() {
+    const html = document.documentElement;
+    const circle = document.getElementById('toggleCircle');
+    if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        circle.textContent = '☀️';
+    } else {
+        html.setAttribute('data-theme', 'light');
+        circle.textContent = '🌙';
+    }
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card, .portfolio-card, .pricing-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+</script>
+</body>
+</html>
